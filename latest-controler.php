@@ -3,11 +3,14 @@ session_start();
 $page = 'latest';
 require_once __DIR__ . "/models/Model.php";
 require_once __DIR__ . "./models/m-products.php";
-require_once __DIR__ . "./models/m-shopping-cart.php";
+require_once __DIR__ . "/Lib/ShoppingCart.php";
+require_once __DIR__ . "/Lib/ShoppingCartItem.php";
+
 
 
 // USING MODELS
 use models\Product\Product;
+use Lib\ShoppingCart\ShoppingCart;
 
 // SHOPPING CART (SESSION)
 if(!isset($_SESSION['cart'])) {
