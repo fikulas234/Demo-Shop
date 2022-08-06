@@ -2,10 +2,14 @@
 session_start();
 $page = 'index';
 
+require_once __DIR__ . "/Models/Model.php";
 require_once __DIR__ . "./models/m-products.php";
 
+// USING MODELS
+use models\Product\Product;
 
-$threeRandom = getThreeRandomProducts();
+
+$threeRandom = Product::getThreeRandomProducts();
 
 $loggedIn = false;
 

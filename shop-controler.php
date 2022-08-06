@@ -1,15 +1,20 @@
 <?php
 session_start();
 $page = 'shop';
-require_once __DIR__ . "./models/m-products.php";
-require_once __DIR__ . "./models/m-shopping-cart.php";
+require_once __DIR__ . "/models/Model.php";
+require_once __DIR__ . "/models/m-products.php";
+require_once __DIR__ . "/Lib/ShoppingCart.php";
+require_once __DIR__ . "/Lib/ShoppingCartItem.php";
+
+// USING MODELS
+use models\Product\Product;
+use Lib\ShoppingCart\ShoppingCart;
 
 $filter = "";
 $sort = "";
 
 
-$products = getAvailableProducts();
-$products = filteredProducts($products, $term);
+$products = Product::getAvailableProducts();
 
 
 
@@ -23,26 +28,25 @@ if(isset($_GET['watches'])) {
 }
 
 
-if($sort === ORDER_BY_PRICE_ASC) {
-    $products = sortByAscending($products);
-} else if ($sort === ORDER_BY_PRICE_DSC) {
-    $products = sortByDescending($products);
 
-} else {
-    $products = getAvailableProducts();
-} 
-
-if($filter != "") {
-    $products = filteredProducts($products, $filter);
-} 
-
-// SHOPPING CART (SESSION)
-if(!isset($_SESSION['cart'])) {
-    $_SESSION['cart'] = [];
+if ($filter != "") {
+    $products = Product::filteredProducts($filter, $products);
 }
 
-if(isset($_POST['product_id']) && !empty($_POST['product_id'])) {
-    $_SESSION['cart'][] = $_POST['product_id'];
+if ($sort != "") {
+    $products = Product::sortProductBy($sort, $products);
+} 
+
+
+
+// SHOPPING CART (SESSION)
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
+$shoppingCart = new ShoppingCart($_SESSION['cart']);
+if (isset($_POST['product_id']) && !empty($_POST['product_id'])) {
+    $shoppingCart->addToCart(Product::getOneProductById($_POST['product_id']));
+    $shoppingCart->updateSession();
 }
 
 $loggedIn = false;
@@ -58,8 +62,10 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
 //HEADER
 require __DIR__ . "/views/_layout/v-header.php";
 
+
 //PAGE
 require __DIR__ . "/views/v-shop.php";
+
 
 // FOOTER
 require __DIR__ . "/views/_layout/v-footer.php";

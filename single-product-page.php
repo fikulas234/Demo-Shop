@@ -1,6 +1,13 @@
 <?php
 session_start();
+require_once __DIR__ . "/models/Model.php";
 require_once __DIR__ . "./models/m-products.php";
+require_once __DIR__ . "/Lib/ShoppingCart.php";
+require_once __DIR__ . "/Lib/ShoppingCartItem.php";
+
+// USING MODELS
+use models\Product\Product;
+use Lib\ShoppingCart\ShoppingCart;
 
 $loggedIn = false;
 $logMessages = [];
@@ -32,11 +39,24 @@ if(!empty($_GET['stranica'])) {
     $productId = $_GET['stranica'];
 }
 
-$product = getOneProductById($productId);
-$next = getNextProduct($productId);
-$prev = getPrevProduct($productId);
+// SHOPPING CART (SESSION)
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = [];
+}
 
-$relatedProducts = getRelatedProducs($product);
+
+$shoppingCart = new ShoppingCart($_SESSION['cart']);
+if (isset($_POST['product_id']) && !empty($_POST['product_id'])) {
+
+        $shoppingCart->addToCart(Product::getOneProductById($_POST['product_id']), $_POST['quantity']);
+        $shoppingCart->updateSession();
+    
+}
+
+$product = Product::getOneProductById($productId);
+
+
+$relatedProducts = $product->getRelatedProducts();
 
 // HEADER
 require __DIR__ . "/views/_layout/v-header.php";

@@ -65,31 +65,22 @@
   <button type="submit" class="btn btn-order" name="submit" value="submit">Proceed to payment</button>
 </form>
 </div>
-<div class="col-6 mt-5 mb-5">
-<?php $total = 0; ?>
+<div class="col-6 mt-5">
     <div class="card mx-auto mb-3 mt-5" style="max-width: 340px;">
-<?php foreach ($items as $item) { ?>
-    <?php
-        $subtotal = $item->getSubtotal();
-        $total += $subtotal;
-        ?>
         <div class="row g-0">
             <div class="text-center">
-                <img src="<?php echo htmlspecialchars($item->getProduct()->img); ?>" class="img-fluid rounded-start" width="150px" height="200px"/>
+                <img src="<?php echo htmlspecialchars($img); ?>" class="img-fluid rounded-start" width="150px" height="200px"/>
             </div>
             <div class=" bg-warning text-light">
                 <div class="card-body">
-                    <h5 class="card-title"><?php echo htmlspecialchars($item->getProduct()->title); ?></h5>
-                    <p class="card-text">Price: <?php echo htmlspecialchars($item->getProduct()->price); ?></p>
-                    <p class="card-text">Quantity: <?php echo htmlspecialchars($item->getQuantity()); ?></p>
-                    <p class="card-text">Price with quantity: <?php echo htmlspecialchars($subtotal); ?></p>
-                  </div>
+                    <h5 class="card-title"><?php echo htmlspecialchars($title); ?></h5>
+                    <p class="card-text">Price: <?php echo htmlspecialchars($price); ?></p>
                 </div>
-              </div>
-              <?php } ?>
-              <p class="card-text">Total: <?php echo htmlspecialchars($total . "$"); ?></p>
+            </div>
+        </div>
     </div>
 </div>
+
 
 
 </main>

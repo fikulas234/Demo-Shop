@@ -33,15 +33,15 @@
             <div class="card single-card col-xl-2 col-lg-3 col-md-6 col-sm-6 mb-3">
                 <div class="m-2">
                     <div class="img-container-card text-center d-flex align-items-end">
-                        <img src="<?php echo $single['img'] ?>" class="card-img-top" alt="...">
+                        <img src="<?php echo $single->img ?>" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body text-center align-items-center row justify-content-center">
-                        <h5 class="card-title"><?php echo $single['title']; ?><br>(NEW)</h5>
-                        <p class="card-text"><?php echo $single['price']; ?>$</p>
-                        <a class="btn btn-buy" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($single['id']) ?>">BUY NOW</a>
-                        <button form="add-to-cart-<?php echo htmlspecialchars($single['id']); ?>" class="btn btn-cart" >ADD TO CART</a>
-                        <form id="add-to-cart-<?php echo htmlspecialchars($single['id']); ?>" action="./latest-controler.php" method="post">
-                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($single['id']); ?>">
+                        <h5 class="card-title"><?php echo $single->title; ?><br>(NEW)</h5>
+                        <p class="card-text"><?php echo $single->price; ?>$</p>
+                        <a class="btn btn-buy" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($single->id) ?>">BUY NOW</a>
+                        <button form="add-to-cart-<?php echo htmlspecialchars($single->id); ?>" class="btn btn-cart" >ADD TO CART</a>
+                        <form id="add-to-cart-<?php echo htmlspecialchars($single->id); ?>" action="./latest-controler.php" method="post">
+                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($single->id); ?>">
                         </form>
                     </div>
                 </div>

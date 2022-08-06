@@ -1,8 +1,14 @@
 <?php
 session_start();
 $page = 'latest';
+require_once __DIR__ . "/models/Model.php";
 require_once __DIR__ . "./models/m-products.php";
 require_once __DIR__ . "./models/m-shopping-cart.php";
+
+
+// USING MODELS
+use models\Product\Product;
+
 // SHOPPING CART (SESSION)
 if(!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = [];
@@ -22,23 +28,19 @@ if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] == true) {
     echo "<br><br>";
 }
 
-
+$filter = "";
 $sort = "";
-$new = getNewProducts();
+$new = Product::getNewProducts();
 
 if(isset($_GET['new'])) {
     $sort = $_GET['new'];
 }
 
-if($sort === ORDER_BY_PRICE_ASC) {
-    $new = sortByAscendingNew($new);
-} else if ($sort === ORDER_BY_PRICE_DSC) {
-    $new = sortByDescendingNew($new);
-
+if ($sort != "") {
+    $new = Product::sortProductBy($sort, $new);
 } else {
-    $new = getNewProducts();
-}
-
+    $new = Product::getNewProducts();
+} 
 
 
 require __DIR__ . '/views/_layout/v-header.php';

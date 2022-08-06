@@ -21,7 +21,7 @@
               alt="First slide"
             />
             <div id="hero-caption-one">
-              <a class="check-it text-reset" href="single-product-page.php?stranica=16">CHECK IT OUT</a>
+              <a class="check-it text-reset" href="single-product-page.php?stranica=142">CHECK IT OUT</a>
             </div>
           </div>
           <div class="carousel-item">
@@ -31,7 +31,7 @@
               alt="Second slide"
             />
             <div id="hero-caption-two">
-              <a class="check-it text-reset" href="single-product-page.php?stranica=14">CHECK IT OUT</a>
+              <a class="check-it text-reset" href="single-product-page.php?stranica=141">CHECK IT OUT</a>
             </div>
           </div>
           <div class="carousel-item">
@@ -41,7 +41,7 @@
               alt="Third slide"
             />
             <div id="hero-caption-three">
-              <a class="check-it text-reset" href="single-product-page.php?stranica=22">CHECK IT OUT</a>
+              <a class="check-it text-reset" href="single-product-page.php?stranica=143">CHECK IT OUT</a>
             </div>
           </div>
         </div>
@@ -77,18 +77,18 @@
           <div class="row">
           <?php foreach ($threeRandom as $product) { ?>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
-              <a href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product['id']) ?>">
+              <a href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product->id) ?>">
               <div class="card index-card">
                 <img
-                  src="<?php echo $product['img'] ?>"
+                  src="<?php echo $product->img ?>"
                   class="card-img-top"
                   alt="..."
                 />
                 </a>
                 <div class="card-body text-center">
-                  <p class="card-text"><?php echo $product['title']; ?></p>
-                  <p class="card-text"><?php echo $product['brand'] ?></p>
-                  <a class="check-most-sells text-reset" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product['id']) ?>">Check it out</a>
+                  <p class="card-text"><?php echo $product->title; ?></p>
+                  <p class="card-text"><?php echo $product->brand ?></p>
+                  <a class="check-most-sells text-reset" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product->id) ?>">Check it out</a>
                 </div>
               </div>
             </div>
@@ -121,18 +121,18 @@
           <div class="row">
           <?php foreach ($threeRandom as $product) { ?>
             <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 mb-3">
-              <a href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product['id']) ?>">
+              <a href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product->id) ?>">
               <div class="card index-card">
                 <img
-                  src="<?php echo $product['img'] ?>"
+                  src="<?php echo $product->img ?>"
                   class="card-img-top"
                   alt="..."
                 />
                 </a>
                 <div class="card-body text-center">
-                  <p class="card-text"><?php echo $product['title']; ?></p>
-                  <p class="card-text"><?php echo $product['brand'] ?></p>
-                  <a class="check-most-sells text-reset" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product['id']) ?>">Check it out</a>
+                  <p class="card-text"><?php echo $product->title; ?></p>
+                  <p class="card-text"><?php echo $product->brand ?></p>
+                  <a class="check-most-sells text-reset" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($product->id) ?>">Check it out</a>
                 </div>
               </div>
             </div>

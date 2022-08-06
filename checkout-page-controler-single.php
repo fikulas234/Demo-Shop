@@ -3,20 +3,34 @@ session_start();
 
 require_once __DIR__ . "/models/Model.php";
 require_once __DIR__ . "/models/m-products.php";
-require_once __DIR__ . "/Lib/ShoppingCart.php";
-require_once __DIR__ . "/Lib/ShoppingCartItem.php";
 
 // USING MODELS
 use models\Product\Product;
-use Lib\ShoppingCart\ShoppingCart;
+
+
+$productId = $_GET['id'];
+/* $quantity = $_GET['quantity']; */
 
 
 
-$shoppingCart = new ShoppingCart($_SESSION['cart']);
-$items = $shoppingCart->getItems();
+$product = Product::getOneProductById($productId);
 
+$img = $product->img;
+$title = $product->title;
+$price = $product->price;
 
 $systemErrors = [];
+
+/* $_GET['f_name'] = $_GET['l_name'] =  $_GET['email'] =  $_GET['city'] =  $_GET['phone'] =  $_GET['street_and_num'] = $_GET['zip'] = $_GET['terms'] = '';
+
+$firstName = $_GET['f_name']; 
+$lastName = $_GET['l_name']; 
+$email = $_GET['email']; 
+$city = $_GET['city']; 
+$phone = $_GET['phone'];
+$street = $_GET['street_and_num'];
+$zip = $_GET['zip'];
+$terms = $_GET['terms']; */
 
 if (isset($_GET['submit'])) {
 
@@ -57,17 +71,20 @@ if(empty($_GET['zip']) || strlen(str_replace(' ', '', $_GET['zip'])) !== 5 ) {
 }
 
 
-if(empty($_GET['terms'])) {
+if(!isset($_GET['terms'])) {
     $systemErrors['terms'] = 'You must check privacy and terms checkbox.';
 }
 
 if(empty($systemErrors)) {
     unset($_SESSION['cart']);
     header('Location: ./thank-you-page.php');
+} 
 }
 
-}
 
+
+
+/* $is_errors = count($systemErrors) > 0 ? false : true; */
 
 $loggedIn = false;
 $logMessages = [];
@@ -83,7 +100,9 @@ require __DIR__ . "/views/_layout/v-header.php";
 
 
 //MAIN
-require __DIR__ . "/views/v-checkout-page.php";
+require __DIR__ . "/views/v-checkout-page-single.php";
+
+var_dump($img);
 
 
 // FOOTER

@@ -19,6 +19,7 @@
         </div>
 </div>
 
+
 <form class="form-inline my-2 my-lg-0 col-lg-2 d-flex">
         <div class="select col-lg-6">
           <select class="form-select" aria-label="Default select example" name = "watches" onchange="this.form.submit()">
@@ -33,15 +34,15 @@
             <div class="card single-card col-xl-2 col-lg-3 col-md-6 col-sm-6 mb-3">
                 <div class="m-2">
                     <div class="img-container-card text-center d-flex align-items-end">
-                        <img src="<?php echo $singleProduct['img'] ?>" class="card-img-top" alt="...">
+                        <img src="<?php echo $singleProduct->img ?>" class="card-img-top" alt="...">
                     </div>
                     <div class="card-body text-center align-items-center row justify-content-center">
-                        <h5 class="card-title"><?php echo $singleProduct['title']; ?></h5>
-                        <p class="card-text"><?php echo $singleProduct['price']; ?>$</p>
-                        <a class="btn btn-buy" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($singleProduct['id']) ?>">BUY NOW</a>
-                        <button form="add-to-cart-<?php echo htmlspecialchars($singleProduct['id']); ?>" class="btn btn-cart" >ADD TO CART</a>
-                        <form id="add-to-cart-<?php echo htmlspecialchars($singleProduct['id']); ?>" action="./shop-controler.php" method="post">
-                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($singleProduct['id']); ?>">
+                        <h5 class="card-title"><?php echo $singleProduct->title; ?></h5>
+                        <p class="card-text"><?php echo $singleProduct->price; ?>$</p>
+                        <a class="btn btn-buy" href="./single-product-page.php?stranica=<?php echo htmlspecialchars($singleProduct->id) ?>">SHOW PRODUCT</a>
+                        <button form="add-to-cart-<?php echo htmlspecialchars($singleProduct->id); ?>" class="btn btn-cart" >ADD TO CART</a>
+                        <form id="add-to-cart-<?php echo htmlspecialchars($singleProduct->id); ?>" action="./shop-controler.php" method="post">
+                            <input type="hidden" name="product_id" value="<?php echo htmlspecialchars($singleProduct->id); ?>">
                         </form>
                     </div>
                 </div>
@@ -49,3 +50,4 @@
         <?php } ?>
     </div>
 </div>
+

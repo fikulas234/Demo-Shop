@@ -3,10 +3,31 @@ session_start();
 if(empty($_SESSION['cart'])) {
     header("Location: ./shop-controler.php");
 }
+require_once __DIR__ . "/Models/Model.php";
 require_once __DIR__ . "./models/m-products.php";
-require_once __DIR__ . "./models/m-shopping-cart.php";
+require_once __DIR__ . "/Lib/ShoppingCart.php";
+require_once __DIR__ . "/Lib/ShoppingCartItem.php";
 
-$items = getShoppingCart();
+// USING MODELS
+use Models\Product\Product;
+use Lib\ShoppingCart\ShoppingCart;
+
+/* $items = getShoppingCart(); */
+
+
+$shoppingCart = new ShoppingCart($_SESSION['cart']);
+    // REMOVE ITEMS
+    if(!empty($_POST['remove']) && is_array($_POST['remove'])) {
+        foreach ($_POST['remove'] as $productId) {
+            $shoppingCart->removeProduct(Product::getOneProductById($productId));
+            $shoppingCart->updateSession();
+            if(empty($_SESSION['cart'])) {
+                header("Location: ./shop-controler.php");
+            }
+        }
+    }
+
+$items = $shoppingCart->getItems();
 
 $loggedIn = false;
 $logMessages = [];

@@ -4,7 +4,7 @@
 include ('db.php');
 
 
-class Users extends Connection { //nas korisnik, korisnik koga pravimo, registrujemp, extend db da bi moglo da se povezuje sa bazom
+class Users extends Connection { //nas korisnik, korisnik koga pravimo, registrujemp, extend da bi moglo da se povezuje sa bazom
 
     public function setUsers($name, $email, $password) {
         if(!empty($name) && !empty($email) && !empty($password)) {
@@ -45,6 +45,7 @@ class Users extends Connection { //nas korisnik, korisnik koga pravimo, registru
             echo "You are logged in successfully";
             $_SESSION['loggedin'] = true;
             $_SESSION['email'] = $email;
+
         } else {
             echo "You need to register an account";
         }
